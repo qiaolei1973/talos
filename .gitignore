@@ -87,3 +87,5 @@ tmp/
 # Test files
 ralph-test/
 
+/tasks/
+/ralph/
