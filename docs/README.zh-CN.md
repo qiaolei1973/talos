@@ -4,12 +4,14 @@
 
 Talos 是一个基于 Ralph 的 CLI 工具，支持在 Claude Code、Cursor cli 下运行。它支持你并行的在多个仓库下、执行多个 Ralph Loop 任务。
 
+![Task Monitor](images/task-monitor.png)
+
 ## 快速开始
 
 ### 1. 添加工作区
 
 ```bash
-talos workspace add /path/to/project --name my-project
+talos workspace add
 ```
 
 ### 2. 生成 PRD
