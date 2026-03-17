@@ -1,13 +1,8 @@
 /**
- * TaskRepository - Repository implementation for Task entities
+ * TaskRepository - Task entity persistence layer
  *
- * Implements ITaskRepository interface from @talos/types.
- * Provides persistence layer for Task rich domain model.
- *
- * DESIGN PRINCIPLES:
- * - Only accepts complete Task entities (no partial updates)
- * - Converts between Task entity and TaskMetadata DTO
- * - Uses LocalStorageEngine directly for file I/O (no intermediate layer)
+ * Implements ITaskRepository, accepting only complete Task entities
+ * and converting between Task entity and TaskMetadata DTO.
  */
 
 import type { ITask, TaskFilter as ITaskFilter } from "@talos/types";
