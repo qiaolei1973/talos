@@ -192,24 +192,16 @@ export class Task implements ITask {
   // ============================================
 
   /**
-   * Start the task (pending → running, stopped → running for resume)
-   * 启动任务 (pending → running，stopped → running 用于恢复)
-   *
-   * @throws Error if task is not in pending or stopped state
+   * Start the task (pending → running, stopped → running, failed → running)
+   * 启动任务 (pending → running，stopped → running，failed → running)
    */
   start(): void {
-    if (this.status !== "pending" && this.status !== "stopped") {
-      throw new Error(
-        `Cannot start task from status '${this.status}'. Task must be in 'pending' or 'stopped' state.`
-      );
+    // Clear error and completedAt when restarting from failed state
+    if (this.status === "failed") {
+      this.error = undefined;
+      this.completedAt = undefined;
     }
-    // Save original status before transition
-    const wasPending = this.status === "pending";
-    this.transitionTo("running");
-    // Set startedAt only for initial start (not resume)
-    if (wasPending) {
-      this.startedAt = Date.now();
-    }
+    this.status = "running";
   }
 
   /**
@@ -302,7 +294,7 @@ export class Task implements ITask {
       pending: ["running", "stopped"],
       running: ["completed", "failed", "stopped"],
       completed: [],
-      failed: [],
+      failed: ["running"],
       stopped: ["running"]
     };
     return transitions[status];
