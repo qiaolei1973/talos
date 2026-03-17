@@ -1,4 +1,4 @@
-# @talos/cli
+# talos-cli
 
 Talos is a CLI tool based on Ralph that supports running under Claude Code and Cursor CLI. It enables you to execute multiple Ralph Loop tasks in parallel across multiple repositories.
 

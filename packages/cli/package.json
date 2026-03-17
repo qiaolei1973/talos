@@ -1,10 +1,7 @@
 {
-  "name": "@talos/cli",
+  "name": "talos-cli",
   "version": "0.0.1",
   "private": false,
-  "publishConfig": {
-    "access": "public"
-  },
   "description": "Talos CLI tool for managing development workflows",
   "bin": {
     "talos": "./dist/index.js"
