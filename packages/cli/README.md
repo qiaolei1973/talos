@@ -14,26 +14,6 @@ talos status                        # Check main process status
 talos logs [-f] [-n <number>]       # View logs
 ```
 
-### Daemon Management
-
-```bash
-talos daemon start                  # Start daemon
-talos daemon stop                   # Stop daemon
-talos daemon restart                # Restart daemon
-talos daemon status                 # Check daemon status
-talos daemon logs [-f] [-n <number>]  # View daemon logs
-talos daemon health                 # Daemon health check
-```
-
-### Web UI Management
-
-```bash
-talos ui start [--port <number>]    # Start Web UI (default port 3000)
-talos ui stop                       # Stop Web UI
-talos ui status                     # Check Web UI status
-talos ui logs [-f] [-n <number>]    # View Web UI logs
-```
-
 ### Task Management
 
 ```bash
@@ -81,7 +61,7 @@ talos workspace list [--json]                        # List all workspaces
 
 ```bash
 talos prd                                    # Create PRD through AI conversation
-talos ralph --prd <prdFiles...> [--force]     # Convert PRD to Ralph format
+talos ralph --prd <prdFiles...> [--force]     # Convert PRD(s) to Ralph format (merge multiple PRDs into one)
 talos archive [identifier] [--all] [--force]  # Archive completed PRDs
 ```
 

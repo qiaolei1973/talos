@@ -11,7 +11,7 @@ Talos is a CLI tool based on Ralph that supports running under Claude Code and C
 ### 1. Add Workspace
 
 ```bash
-talos workspace add /path/to/project --name my-project
+talos workspace add
 ```
 
 ### 2. Generate PRD
