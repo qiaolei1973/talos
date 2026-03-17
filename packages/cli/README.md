@@ -2,6 +2,19 @@
 
 Talos is a CLI tool based on Ralph that supports running under Claude Code and Cursor CLI. It enables you to execute multiple Ralph Loop tasks in parallel across multiple repositories.
 
+## Installation
+
+```bash
+# Install globally
+npm install -g talos-cli
+
+# Or using pnpm
+pnpm add -g talos-cli
+
+# Or using npx (no installation required)
+npx talos-cli
+```
+
 ## Complete Command Reference
 
 ### Main Process Management
