@@ -431,10 +431,12 @@ export class RalphExecutor extends EventEmitter {
    */
   private async buildPrompt(): Promise<string> {
     // Try multiple possible locations for skill.md
+    // Priority: bundled assets/ directory, then fallback to dev paths
     const possiblePaths = [
-      join(__dirname, "skill.md"),
-      join(__dirname, "..", "..", "assets", "skill.md"),
-      join(__dirname, "..", "assets", "skill.md"),
+      join(__dirname, "assets", "skill.md"),           // Bundled: dist/assets/skill.md
+      join(__dirname, "skill.md"),                      // Legacy: dist/skill.md
+      join(__dirname, "..", "..", "assets", "skill.md"), // Dev: packages/executor/assets
+      join(__dirname, "..", "assets", "skill.md"),     // Dev: assets/
       join(process.cwd(), "packages", "executor", "assets", "skill.md"),
       join(process.cwd(), "packages", "core", "assets", "skill.md"),
     ];

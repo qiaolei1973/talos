@@ -73,13 +73,17 @@ export default defineConfig({
       console.warn(`Warning: ${ralphCliPath} not found. Ralph executor may not work.`);
     }
 
-    // Copy skill.md for ralph-cli
+    // Copy skill.md for ralph-cli to assets directory
     const skillMdPath = join(process.cwd(), '../executor/dist/skill.md');
-    const skillDestPath = join(distPath, 'skill.md');
+    const assetsDir = join(distPath, 'assets');
+
+    // Ensure assets directory exists
+    await promises.mkdir(assetsDir, { recursive: true });
 
     if (existsSync(skillMdPath)) {
+      const skillDestPath = join(assetsDir, 'skill.md');
       copyFileSync(skillMdPath, skillDestPath);
-      console.log('Copied skill.md to dist/skill.md');
+      console.log('Copied skill.md to dist/assets/skill.md');
     } else {
       console.warn(`Warning: ${skillMdPath} not found. Ralph executor may not work correctly.`);
     }
