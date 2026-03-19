@@ -430,39 +430,19 @@ export class RalphExecutor extends EventEmitter {
    * Build the Claude prompt from skill.md template
    */
   private async buildPrompt(): Promise<string> {
-    // Try multiple possible locations for skill.md
-    // Priority: bundled assets/ directory, then fallback to dev paths
-    const possiblePaths = [
-      join(__dirname, "assets", "skill.md"),           // Bundled: dist/assets/skill.md
-      join(__dirname, "skill.md"),                      // Legacy: dist/skill.md
-      join(__dirname, "..", "..", "assets", "skill.md"), // Dev: packages/executor/assets
-      join(__dirname, "..", "assets", "skill.md"),     // Dev: assets/
-      join(process.cwd(), "packages", "executor", "assets", "skill.md"),
-      join(process.cwd(), "packages", "core", "assets", "skill.md"),
-    ];
+    // Only look in the standard bundled path
+    // This ensures local testing matches production behavior
+    const skillMdPath = join(__dirname, "assets", "skill.md");
 
     await this.logInfo(`RalphExecutor.buildPrompt():`);
     await this.logInfo(`  __dirname: ${__dirname}`);
-    await this.logInfo(`  __filename: ${__filename}`);
-    await this.logInfo(`  import.meta.url: ${import.meta.url}`);
-    await this.logInfo(`  process.cwd(): ${process.cwd()}`);
+    await this.logInfo(`  skill.md path: ${skillMdPath}`);
 
-    // Find the first existing skill.md
-    let skillMdPath: string | null = null;
-    for (const testPath of possiblePaths) {
-      await this.logInfo(`Testing path: ${testPath}`);
-      try {
-        await readFile(testPath);
-        skillMdPath = testPath;
-        await this.logInfo(`Found skill.md at: ${skillMdPath}`);
-        break;
-      } catch {
-        await this.logInfo(`  Not found: ${testPath}`);
-      }
-    }
-
-    if (!skillMdPath) {
-      const errorMsg = `skill.md not found in any of these locations:\n${possiblePaths.map(p => "  - " + p).join("\n")}`;
+    // Check if skill.md exists
+    try {
+      await readFile(skillMdPath);
+    } catch {
+      const errorMsg = `skill.md not found at: ${skillMdPath}\nMake sure you have built the CLI with 'pnpm build'`;
       await this.logError(errorMsg);
       throw new Error(errorMsg);
     }
