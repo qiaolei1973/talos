@@ -1,6 +1,6 @@
 {
   "name": "@talos/web",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": true,
   "description": "Talos Web UI Server Package",
   "type": "module",
